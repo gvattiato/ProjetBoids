@@ -34,28 +34,41 @@
 // ===========================================================================
 //                                  Constructors
 // ===========================================================================
+
+// Default constructor
 Agent::Agent(void)
 {
 	index = 0;
 	radius = 0;
-	x_position = 0;
-	y_position = 0;
-	x_speed = 0;
-	y_speed = 0;
-
+	Vector position;
+	position.setX(0);
+	position.setY(0);
+	Vector speed;
+	speed.setX(0);
+	speed.setY(0);
 }
 
-/*
-Agent::Agent(int i, float r, float px, float py, float sx, float sy)
+// Copy constructor
+Agent::Agent(int aindex, float aradius, Vector new_position, Vector new_speed)
 {
-	index = i;
-	radius = r;
-	x_position = px;
-	y_position = py;
-	x_speed = sx;
-	y_speed = sy;
+	index = aindex;
+	radius = aradius;
+	position = new_position;
+	speed = new_speed;
 }
-*/
+
+// Constructor taking only the index and the radius as parameters
+Agent::Agent(int aindex, float aradius)
+{
+	index = aindex;
+	radius = aradius;
+	position.setX(1);
+	position.setY(1);
+	speed.setX(1);
+	speed.setY(1);
+}
+
+
 
 // ===========================================================================
 //                                  Destructor
@@ -89,14 +102,9 @@ int Agent::getIndex(void) const
 	return index;
 }
 
-float Agent::getXSpeed(void) const
+Vector Agent::getSpeed(void) const
 {
-	return x_speed;
-}
-
-float Agent::getYSpeed(void) const
-{
-	return y_speed;
+	return speed;
 }
 
 float Agent::getRadius(void) const
@@ -104,19 +112,36 @@ float Agent::getRadius(void) const
 	return radius;
 }
 
-float Agent::getXPosition(void) const
+Vector Agent::getPosition(void) const
 {
-	return x_position;
+	return position;
 }
 
-float Agent::getYPosition(void) const
-{
-	return y_position;
-}
+
 
 void Agent::updatePosition(float dt)
 {
-	x_position += dt*x_speed;
-	y_position += dt*y_speed;
+//	x_position += dt*x_speed;
+//	y_position += dt*y_speed;
 }
 
+/*
+// Checks if the agent whose position is given as parameter is inside the radius of this agent
+bool Agent::isSomeoneNear(float a_x, float a_y)
+{
+  bool checkRadius = false;
+  float dx = x_position - a_x;
+  float dy = y_position - a_y;
+  float distance = sqrt(dx*dx + dy*dy);
+
+  if (dx<0)
+  	dx = -dx;
+  if (dy<0)
+  	dx = -dx;
+
+  if (distance<radius)
+    checkRadius = true;
+  
+    return checkRadius; 
+}
+*/

@@ -22,7 +22,7 @@
 //                                Project Files
 // ===========================================================================
 
-
+#include "Vector.h"
 
 
 // ===========================================================================
@@ -43,6 +43,8 @@ class Agent
     //                               Constructors
     // =======================================================================
     Agent(void);
+    Agent(int aindex, float aradius, Vector new_position, Vector new_speed);
+    Agent(int aindex, float aradius);
 
     // =======================================================================
     //                                Destructor
@@ -54,11 +56,10 @@ class Agent
     // =======================================================================
 	
 	int getIndex(void) const;
-	float getXPosition(void) const;
-	float getYPosition(void) const;
-	float getXSpeed(void) const;
-	float getYSpeed(void) const;
-	float getRadius(void) const;
+    float getRadius(void) const;
+	Vector getPosition(void) const;
+	Vector getSpeed(void) const;
+
 
     // =======================================================================
     //                            Accessors: setters
@@ -102,18 +103,18 @@ class Agent
     // =======================================================================
 
 	void updatePosition(float dt);
-	
+    //bool isSomeoneNear(Vector another); 
+
 
     // =======================================================================
     //                             Protected Attributes
     // =======================================================================
 
 	int index; 
-	float x_position;
-	float y_position; 
-	float x_speed;
-	float y_speed;
-	float radius;
+    float radius;
+	Vector position;
+	Vector speed;
+	
 
 };
 
@@ -135,4 +136,4 @@ class Agent
 // ===========================================================================
 
 
-#endif // __Agent_H__
+#endif // __AGENT_H__

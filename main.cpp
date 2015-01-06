@@ -28,8 +28,7 @@
 //                         Declare Miscellaneous Functions
 // ===========================================================================
 
-
-
+float alignement (Prey* preys);
 
 
 
@@ -40,6 +39,10 @@
 // ===========================================================================
 int main(int argc, char* argv[])
 {
+  //Prey* preys = new Prey [10];
+  //for (int i=0; i<10; i++)
+  	//preys[i] = new Prey(i, 2);
+
   printf("Hello World !\n");
 
   return 0;
@@ -50,4 +53,20 @@ int main(int argc, char* argv[])
 // ===========================================================================
 //                         Define Miscellaneous Functions
 // ===========================================================================
+
+float alignement (Prey* preys)
+{
+  //float v1;
+  int K = 0;
+  
+  for (int i=0; i<10; i++)
+  {
+    //if (preys[i].isSomeoneNear() == true)
+ 	  K+=1;
+  }
+
+return 0;
+
+
+}
 

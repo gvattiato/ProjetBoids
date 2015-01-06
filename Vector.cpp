@@ -18,13 +18,13 @@
 //                                 Project Files
 // ===========================================================================
 
-#include "Prey.h"
+#include "Vector.h"
 
 
 
 //############################################################################
 //                                                                           #
-//                        	  		Class Prey                            	 #
+//                        	  		Class Vector                            	 #
 //                                                                           #
 //############################################################################
 
@@ -35,15 +35,27 @@
 // ===========================================================================
 //                                  Constructors
 // ===========================================================================
-Prey::Prey(void)
-{
 
+// Default constructor
+Vector::Vector(void)
+{
+	x = 0;
+	y = 0;
+	norm = sqrt(x*x + y*y);
+}
+
+// Copy constructor
+Vector::Vector(float new_x, float new_y)
+{
+	x = new_x;
+	y = new_y;
+	norm = sqrt(x*x + y*y);
 }
 
 // ===========================================================================
 //                                  Destructor
 // ===========================================================================
-Prey::~Prey(void)
+Vector::~Vector(void)
 {
 }
 
@@ -51,9 +63,58 @@ Prey::~Prey(void)
 //                                 Public Methods
 // ===========================================================================
 
-void Prey::updateSpeed(float dt, float gamma1, float gamma2, float gamma3, Vector v1, Vector v2, Vector v3)
+float Vector::getX(void)
 {
-	speed = speed + (v1*gamma1 + v2*gamma2 + v3*gamma3)*dt;
+  return x; 
+}
+
+float Vector::getY(void)
+{
+  return y;
+}
+
+const float Vector::getNorm(void)
+{
+	return norm;
+}
+
+void Vector::setX(float new_x)
+{
+	x=new_x;
+}
+
+void Vector::setY(float new_y)
+{
+	y=new_y;
+}
+
+void Vector::updateNorm(void)
+{
+	norm = sqrt(x*x + y*y);
+}
+
+Vector Vector::operator*(float f)
+{
+	x = x*f;
+	y = y*f;
+	updateNorm();
+	return *this;
+}
+
+Vector Vector::operator+(Vector otherVector)
+{
+	x += otherVector.getX();
+	y += otherVector.getY();
+	updateNorm();
+	return *this;
+}
+
+Vector Vector::operator=(Vector otherVector)
+{
+	x = otherVector.getX();
+	y = otherVector.getY();
+	updateNorm();
+	return *this;
 }
 
 // ===========================================================================
@@ -69,3 +130,9 @@ void Prey::updateSpeed(float dt, float gamma1, float gamma2, float gamma3, Vecto
 //  							Methods definition
 //============================================================================
 
+/*
+void Agent::updateSpeed(float dt, float gamma1, float gamma2, float gamma3, float v1, float v2, float v3) 
+{
+	x_speed += dt*(gamma1*v1+gamma2*v2*gamma3*v3);
+}
+*/

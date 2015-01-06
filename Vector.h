@@ -6,9 +6,9 @@
 
 
 
-#ifndef __PREY_H__
-#define __PREY_H__
-
+#ifndef  __VECTOR_H__
+#define  __VECTOR_H__
+ 
 
 // ===========================================================================
 //                                  Libraries
@@ -22,8 +22,8 @@
 //                                Project Files
 // ===========================================================================
 
-#include "Agent.h"
-#include "Vector.h"
+
+
 
 // ===========================================================================
 //                              Class declarations
@@ -34,7 +34,7 @@
 
 
 
-class Prey : public Agent
+class Vector
 {
   public :
     
@@ -45,28 +45,43 @@ class Prey : public Agent
     // =======================================================================
     //                               Constructors
     // =======================================================================
-    Prey(void);
+    Vector(void);
+    Vector(float new_x, float new_y);
 
     // =======================================================================
     //                                Destructor
     // =======================================================================
-    virtual ~Prey(void);
+    virtual ~Vector(void);
 
     // =======================================================================
     //                            Accessors: getters
     // =======================================================================
 
+    float getX(void);
+    float getY(void);
+    const float getNorm(void);
+
     // =======================================================================
     //                            Accessors: setters
     // =======================================================================
+
+    void setX(float new_x);
+    void setY(float new_y);
 
     // =======================================================================
     //                                Operators
     // =======================================================================
 
+    Vector operator*(float f);
+    Vector operator+(Vector otherVector);
+    Vector operator=(Vector otherVector);
+
+
     // =======================================================================
     //                              Public Methods
     // =======================================================================
+
+    void updateNorm(void);
 
     // =======================================================================
     //                             Public Attributes
@@ -81,28 +96,30 @@ class Prey : public Agent
     // =======================================================================
     //                            Forbidden Constructors
     // =======================================================================
-    /*Prey(void)
-    {
-      printf("%s:%d: error: call to forbidden constructor.\n", __FILE__, __LINE__);
-      exit(EXIT_FAILURE);
-    };*/
-    Prey(const Prey &model)
+    /*Vector(void)
     {
       printf("%s:%d: error: call to forbidden constructor.\n", __FILE__, __LINE__);
       exit(EXIT_FAILURE);
     };
-
+    Vector(const Vector &model)
+    {
+      printf("%s:%d: error: call to forbidden constructor.\n", __FILE__, __LINE__);
+      exit(EXIT_FAILURE);
+    };
+    */
 
     // =======================================================================
     //                              Protected Methods
     // =======================================================================
 
-    void updateSpeed(float dt, float gamma1, float gamma2, float gamma3, Vector v1, Vector v2, Vector v3);
-
-
     // =======================================================================
     //                             Protected Attributes
     // =======================================================================
+
+    float x;
+    float y;
+    float norm;
+
 };
 
 
@@ -123,4 +140,5 @@ class Prey : public Agent
 // ===========================================================================
 
 
-#endif // __PREY_H__
+#endif // __VECTOR_H__
+
