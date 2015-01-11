@@ -73,8 +73,10 @@ class Vector
     // =======================================================================
 
     Vector operator*(float f);
+    Vector operator/(float f);
     Vector operator+(Vector otherVector);
     Vector operator=(Vector otherVector);
+    Vector operator-(Vector otherVector);
 
 
     // =======================================================================
@@ -82,6 +84,7 @@ class Vector
     // =======================================================================
 
     void updateNorm(void);
+    void print(void);
 
     // =======================================================================
     //                             Public Attributes

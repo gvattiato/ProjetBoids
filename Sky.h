@@ -6,8 +6,8 @@
 
 
 
-#ifndef __AGENT_H__
-#define __AGENT_H__
+#ifndef __SKY_H__
+#define __SKY_H__
 
 
 // ===========================================================================
@@ -22,19 +22,20 @@
 //                                Project Files
 // ===========================================================================
 
-#include "Vector.h"
 
+#include "Prey.h"
 
 // ===========================================================================
 //                              Class declarations
 // ===========================================================================
 
 
-class Agent
+
+
+class Sky
 {
   public :
-   
-
+    
     // =======================================================================
     //                                 Enums
     // =======================================================================
@@ -42,35 +43,25 @@ class Agent
     // =======================================================================
     //                               Constructors
     // =======================================================================
-    Agent(void);
-    Agent(float aradius, float acontact, Vector new_position, Vector new_speed);
-    Agent(float aradius, float acontact);
+    Sky(void);
+    Sky(Prey* prey_population, int new_size);
 
     // =======================================================================
     //                                Destructor
     // =======================================================================
-    virtual ~Agent(void);
+    ~Sky(void);
 
     // =======================================================================
     //                            Accessors: getters
     // =======================================================================
-	
-	//int getIndex(void) const;
-    float getRadius(void) const;
-    float getContact(void) const;
-	Vector getPosition(void) const;
-	Vector getSpeed(void) const;
 
+    int getFlockSize(void) const;
 
     // =======================================================================
     //                            Accessors: setters
     // =======================================================================
 
-    void setPosition(Vector new_position);
-    void setSpeed(Vector new_speed);
-    void setRadius(float new_radius);
-    void setContact(float new_contact);
-
+    void setFlockSize(int new_size);
 
     // =======================================================================
     //                                Operators
@@ -80,9 +71,10 @@ class Agent
     //                              Public Methods
     // =======================================================================
 
-    void updatePosition(float dt);
-    bool isSomeoneNear(Vector another); 
-    bool isSomeoneTouching(Vector another);
+    Vector alignment(int index, float K);
+    Vector centerMass(int index, float K);
+    Vector tooNear(int index, float K);
+
 
 
     // =======================================================================
@@ -92,40 +84,35 @@ class Agent
 
 
 
-
   protected :
 
     // =======================================================================
     //                            Forbidden Constructors
     // =======================================================================
-    /*Agent(void)
-    {
-      printf("%s:%d: error: call to forbidden constructor.\n", __FILE__, __LINE__);
-      exit(EXIT_FAILURE);
-    };
-    Agent(const Agent &model)
+    /*Sky(void)
     {
       printf("%s:%d: error: call to forbidden constructor.\n", __FILE__, __LINE__);
       exit(EXIT_FAILURE);
     };*/
+    Sky(const Sky &model)
+    {
+      printf("%s:%d: error: call to forbidden constructor.\n", __FILE__, __LINE__);
+      exit(EXIT_FAILURE);
+    };
 
 
     // =======================================================================
     //                              Protected Methods
     // =======================================================================
 
-	
+
 
     // =======================================================================
     //                             Protected Attributes
     // =======================================================================
 
-	//int index; 
-    float radius;
-    float contact;
-	Vector position;
-	Vector speed;
-	
+    Prey* flock;
+    int flock_size;
 
 };
 
@@ -147,4 +134,8 @@ class Agent
 // ===========================================================================
 
 
-#endif // __AGENT_H__
+#endif // __Sky_H__
+
+
+
+

@@ -32,8 +32,6 @@
 
 
 
-
-
 class Prey : public Agent
 {
   public :
@@ -45,12 +43,14 @@ class Prey : public Agent
     // =======================================================================
     //                               Constructors
     // =======================================================================
-    Prey(void);
-
+   Prey(void);
+   Prey(float aradius, float acontact, Vector new_position, Vector new_speed) : Agent(aradius, acontact, new_position, new_speed)
+    {
+    }
     // =======================================================================
     //                                Destructor
     // =======================================================================
-    virtual ~Prey(void);
+    ~Prey(void);
 
     // =======================================================================
     //                            Accessors: getters
@@ -67,6 +67,9 @@ class Prey : public Agent
     // =======================================================================
     //                              Public Methods
     // =======================================================================
+
+    void updateSpeed(float dt, float gamma1, float gamma2, float gamma3, Vector v1, Vector v2, Vector v3);
+
 
     // =======================================================================
     //                             Public Attributes
@@ -85,24 +88,24 @@ class Prey : public Agent
     {
       printf("%s:%d: error: call to forbidden constructor.\n", __FILE__, __LINE__);
       exit(EXIT_FAILURE);
-    };*/
+    };
     Prey(const Prey &model)
     {
       printf("%s:%d: error: call to forbidden constructor.\n", __FILE__, __LINE__);
       exit(EXIT_FAILURE);
-    };
+    };*/
 
 
     // =======================================================================
     //                              Protected Methods
     // =======================================================================
 
-    void updateSpeed(float dt, float gamma1, float gamma2, float gamma3, Vector v1, Vector v2, Vector v3);
 
 
     // =======================================================================
     //                             Protected Attributes
     // =======================================================================
+
 };
 
 

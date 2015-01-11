@@ -63,6 +63,11 @@ Vector::~Vector(void)
 //                                 Public Methods
 // ===========================================================================
 
+void Vector::print(void)
+{
+	printf("(%lg,%lg)", x, y);
+}
+
 float Vector::getX(void)
 {
   return x; 
@@ -101,12 +106,21 @@ Vector Vector::operator*(float f)
 	return *this;
 }
 
-Vector Vector::operator+(Vector otherVector)
+Vector Vector::operator/(float f)
 {
-	x += otherVector.getX();
-	y += otherVector.getY();
+	x = x/f;
+	y = y/f;
 	updateNorm();
 	return *this;
+}
+
+Vector Vector::operator+(Vector otherVector)
+{
+	Vector result;
+	result.setX(x + otherVector.getX());
+	result.setY(y + otherVector.getY());
+	result.updateNorm();
+	return result;
 }
 
 Vector Vector::operator=(Vector otherVector)
@@ -115,6 +129,15 @@ Vector Vector::operator=(Vector otherVector)
 	y = otherVector.getY();
 	updateNorm();
 	return *this;
+}
+
+Vector Vector::operator-(Vector otherVector)
+{
+	Vector result;
+	result.setX(x - otherVector.getX());
+	result.setY(y - otherVector.getY());
+	result.updateNorm();
+	return result;
 }
 
 // ===========================================================================
@@ -130,9 +153,3 @@ Vector Vector::operator=(Vector otherVector)
 //  							Methods definition
 //============================================================================
 
-/*
-void Agent::updateSpeed(float dt, float gamma1, float gamma2, float gamma3, float v1, float v2, float v3) 
-{
-	x_speed += dt*(gamma1*v1+gamma2*v2*gamma3*v3);
-}
-*/

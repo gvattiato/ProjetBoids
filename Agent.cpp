@@ -38,30 +38,32 @@
 // Default constructor
 Agent::Agent(void)
 {
-	index = 0;
 	radius = 0;
+	contact = 0;
 	Vector position;
 	position.setX(0);
 	position.setY(0);
 	Vector speed;
 	speed.setX(0);
 	speed.setY(0);
+
 }
 
 // Copy constructor
-Agent::Agent(int aindex, float aradius, Vector new_position, Vector new_speed)
+Agent::Agent(float aradius, float acontact, Vector new_position, Vector new_speed)
 {
-	index = aindex;
 	radius = aradius;
+	contact = acontact;
 	position = new_position;
 	speed = new_speed;
+
 }
 
-// Constructor taking only the index and the radius as parameters
-Agent::Agent(int aindex, float aradius)
+// Constructor taking only the index, the radius and the contact distance as parameters
+Agent::Agent(float aradius, float acontact)
 {
-	index = aindex;
 	radius = aradius;
+	contact = acontact;
 	position.setX(1);
 	position.setY(1);
 	speed.setX(1);
@@ -97,10 +99,7 @@ Agent::~Agent(void)
 //==========================================================================
 
 
-int Agent::getIndex(void) const 
-{
-	return index;
-}
+
 
 Vector Agent::getSpeed(void) const
 {
@@ -112,36 +111,66 @@ float Agent::getRadius(void) const
 	return radius;
 }
 
+float Agent::getContact(void) const
+{
+	return contact;
+}
+
 Vector Agent::getPosition(void) const
 {
 	return position;
 }
 
+ void Agent::setPosition(Vector new_position)
+{
+	position = new_position;
+}
 
+void Agent::setSpeed(Vector new_speed)
+{
+	speed = new_speed;
+}
+
+void Agent::setRadius(float new_radius)
+{
+	radius = new_radius;
+}
+
+void Agent::setContact(float new_contact)
+{
+	radius = new_contact;
+}
 
 void Agent::updatePosition(float dt)
 {
-//	x_position += dt*x_speed;
-//	y_position += dt*y_speed;
+	position.setX(position.getX() + dt*speed.getX());
+	position.setY(position.getY() + dt*speed.getY());
 }
 
-/*
+
 // Checks if the agent whose position is given as parameter is inside the radius of this agent
-bool Agent::isSomeoneNear(float a_x, float a_y)
+bool Agent::isSomeoneNear(Vector other_position)
 {
-  bool checkRadius = false;
-  float dx = x_position - a_x;
-  float dy = y_position - a_y;
-  float distance = sqrt(dx*dx + dy*dy);
+  bool check_radius = false;
+  Vector delta = position - other_position;
+  float norm = delta.getNorm();
 
-  if (dx<0)
-  	dx = -dx;
-  if (dy<0)
-  	dx = -dx;
-
-  if (distance<radius)
-    checkRadius = true;
+  if (norm<radius)
+    check_radius = true;
   
-    return checkRadius; 
+    return check_radius; 
 }
-*/
+
+bool Agent::isSomeoneTouching(Vector other_position)
+{
+  bool check_contact = false;
+  Vector delta = position - other_position;
+  float norm = delta.getNorm();
+
+  if (norm<contact)
+    check_contact = true;
+    
+    return check_contact; 
+}
+
+
