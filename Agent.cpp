@@ -145,32 +145,10 @@ void Agent::updatePosition(float dt)
 {
 	position.setX(position.getX() + dt*speed.getX());
 	position.setY(position.getY() + dt*speed.getY());
+	//printf("when I update the position the speed = (%lg,%lg)\n", speed.getX(), speed.getY());
 }
 
 
-// Checks if the agent whose position is given as parameter is inside the radius of this agent
-bool Agent::isSomeoneNear(Vector other_position)
-{
-  bool check_radius = false;
-  Vector delta = position - other_position;
-  float norm = delta.getNorm();
 
-  if (norm<radius)
-    check_radius = true;
-  
-    return check_radius; 
-}
-
-bool Agent::isSomeoneTouching(Vector other_position)
-{
-  bool check_contact = false;
-  Vector delta = position - other_position;
-  float norm = delta.getNorm();
-
-  if (norm<contact)
-    check_contact = true;
-    
-    return check_contact; 
-}
 
 

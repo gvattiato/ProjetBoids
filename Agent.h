@@ -81,8 +81,6 @@ class Agent
     // =======================================================================
 
     void updatePosition(float dt);
-    bool isSomeoneNear(Vector another); 
-    bool isSomeoneTouching(Vector another);
 
 
     // =======================================================================

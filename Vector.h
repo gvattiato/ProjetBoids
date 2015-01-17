@@ -85,6 +85,10 @@ class Vector
 
     void updateNorm(void);
     void print(void);
+    bool isSomeoneNear(Vector position2, float radius);
+    bool isSomeoneTouching(Vector position2, float contact);
+
+
 
     // =======================================================================
     //                             Public Attributes

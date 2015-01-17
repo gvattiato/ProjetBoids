@@ -24,7 +24,7 @@
 
 //############################################################################
 //                                                                           #
-//                        	  		Class Vector                            	 #
+//                        	  	   Class Vector                            	 #
 //                                                                           #
 //############################################################################
 
@@ -62,6 +62,20 @@ Vector::~Vector(void)
 // ===========================================================================
 //                                 Public Methods
 // ===========================================================================
+
+
+// ===========================================================================
+//                                Protected Methods
+// ===========================================================================
+
+// ===========================================================================
+//                               Non inline accessors
+// ===========================================================================
+
+
+//============================================================================
+//  							Methods definition
+//============================================================================
 
 void Vector::print(void)
 {
@@ -140,16 +154,33 @@ Vector Vector::operator-(Vector otherVector)
 	return result;
 }
 
-// ===========================================================================
-//                                Protected Methods
-// ===========================================================================
 
-// ===========================================================================
-//                               Non inline accessors
-// ===========================================================================
+// Checks if the agent whose position is given as parameter is inside the radius of this agent
+bool Vector::isSomeoneNear(Vector position2, float radius)
+{
+  bool check_radius = false;
+  Vector delta = *this - position2;
+  float norm = delta.getNorm();
 
+  //printf("Hi! Radius = %lg and norm = %lg\n", radius, norm);
+  if (norm<radius)
+  {
+    check_radius = true;
+    //printf("Someone is here");
+  } 
+    return check_radius; 
+}
 
-//============================================================================
-//  							Methods definition
-//============================================================================
+bool Vector::isSomeoneTouching(Vector position2, float contact)
+{
+  bool check_contact = false;
+  Vector delta = *this - position2;
+  float norm = delta.getNorm();
+
+  if (norm<contact) 
+    check_contact = true;
+
+    
+    return check_contact; 
+}
 

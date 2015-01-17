@@ -73,7 +73,8 @@ class Sky
 
     Vector alignment(int index, float K);
     Vector centerMass(int index, float K);
-    Vector tooNear(int index, float K);
+    Vector tooNear(int index, float K, float O, Vector* obstacle, int n_obstacles);
+    Vector wind(int index, int length, int height);
 
 
 

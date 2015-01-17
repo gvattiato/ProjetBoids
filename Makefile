@@ -1,8 +1,8 @@
 
 all: main
 
-main: main.cpp Vector.o Agent.o Prey.o Sky.o
-	g++ -Wall -o main main.cpp Vector.o Agent.o Prey.o Sky.o
+main: main.cpp Vector.o Agent.o Prey.o Sky.o bwindow.o
+	g++ -Wall -o main main.cpp Vector.o Agent.o Prey.o Sky.o bwindow.o -lX11 -L/usr/X11/lib
 
 Vector.o: Vector.cpp Vector.h
 	g++ -Wall -c -o Vector.o Vector.cpp
@@ -15,6 +15,9 @@ Prey.o: Prey.cpp Prey.h
 
 Sky.o: Sky.cpp Sky.h
 	g++ -Wall -c -o Sky.o Sky.cpp
+
+bwindow.o: bwindow.cpp bwindow.h 
+	g++ -c bwindow.cpp -I/usr/X11/include
 
 clean:
 	rm *.o
